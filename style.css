@@ -1,0 +1,54 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Lilita+One&display=swap');
+
+
+body{
+    background-color: rgb(171, 212, 203);
+}
+.Heading{
+    font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.balance{
+    width: 300px;
+    height: 200px;
+    border: solid rgb(153, 184, 181) 5px;
+    border-radius: 10px;
+    border-left: solid rgb(153, 184, 181) 20px; 
+    border-right: solid rgb(153, 184, 181) 20px; 
+
+    
+}
+.line{
+    font-family: "Barriecito", system-ui;
+    font-weight: 100;
+    font-style: normal;
+}
+.info-box {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: white;
+}
+.red { background-color: red; }
+.green { background-color: green; }
+.b1{
+    background-color: antiquewhite;
+    width: fit-content;
+    font-family: "Lilita One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.b2{
+    background-color: antiquewhite;
+    width: fit-content; 
+    font-family: "Lilita One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.hidden {
+    display: none;
+}

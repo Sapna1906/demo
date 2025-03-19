@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
+    <img class="balance" src="bd.jpg" alt="">
+    <br><br>
+    <div class="line">Discover food insights</div>
+    <br>
+    <div class="searchbar">
+        <input type="text" id="searchInput" placeholder="Enter barcode...">
+        <button id="searchButton" onclick="search()">Search</button>
+    </div>
+    
+    
+    
+    
+    <br><br>
+    <div class="b1">
+        <label for="healthRatings">Health Ratings:</label>
+        <select id="healthRatings" onchange="toggleVisibility('healthDetails')">
+            <option value=""></option>
+            <option value="coca_cola">Display</option>
+            
+        </select>
+    </div>
+
+    <div id="healthDetails" class="hidden" style="margin-top: 10px;">
+        <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
+        <div class="info-box red">Sugar</div>
+        <div class="info-box green">Trans Fat</div>
+        <div class="info-box green">Sodium</div>
+    </div>
+
+    <br><br>
+
+    <div class="b2">
+        <label for="ingredientsList">Ingredients List:</label>
+        <select id="ingredientsList" onchange="toggleVisibility('ingredientsDetails')">
+            <option value=""></option>
+            <option value="coca_cola">Display</option>
+        </select>
+    </div>
+
+    <div id="ingredientsDetails" class="hidden" style="margin-top: 10px;">
+        <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
+        Carbonated water,<br>
+        Sugar,<br>
+        Coloring e-150d,<br>
+        Acidulant (phosphoric acid),<br>
+        Natural flavorings (contains caffeine)
+    </div>
+
+    <script>
+        function search() {
+            const input = document.getElementById('searchInput').value;
+            console.log("You searched for:", input);
+        }
+
+        function toggleVisibility(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+
+
+    
+
+    
+</body>
+</html>
