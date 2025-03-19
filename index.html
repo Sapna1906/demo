@@ -5,10 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
     <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
-    <img class="balance" src="bd.jpg" alt="">
+    <br><br>
+    <div class="container">
+        <div class="swiper">
+            
+            <div class="swiper-wrapper">
+              
+              <div class="swiper-slide"><img src="bd.jpg" alt=""></div>
+              <div class="swiper-slide"><img src="choice.jpg" alt=""></div>
+              <div class="swiper-slide"><img src="healthy-eating-habits-1024x689.jpg" alt=""></div>
+            </div>
+            
+            <!-- <div class="swiper-pagination"></div>
+          
+        
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
+          
+            
+          </div>
+    </div>
+    <!-- <img class="balance" src="bd.jpg" alt=""> -->
     <br><br>
     <div class="line">Discover food insights</div>
     <br>
@@ -55,7 +76,7 @@
         Acidulant (phosphoric acid),<br>
         Natural flavorings (contains caffeine)
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
     <script>
         function search() {
             const input = document.getElementById('searchInput').value;
@@ -70,6 +91,26 @@
                 element.classList.add('hidden');
             }
         }
+        const swiper = new Swiper('.swiper', {
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+  
+  loop: true,
+
+//   // If we need pagination
+//   pagination: {
+//     el: '.swiper-pagination',
+//     clickable: true,
+//   },
+
+//   // Navigation arrows
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev',
+//   },
+});
     </script>
 
 
