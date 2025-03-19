@@ -11,13 +11,20 @@ body{
   font-weight: 400;
   font-style: normal;
 }
-.balance{
+.container{
+    display: flex;
+}
+.swiper{
+    /* width: 80%; */
+    height: fit-content;
+}
+.swiper-slide img{
     width: 300px;
     height: 200px;
     border: solid rgb(153, 184, 181) 5px;
     border-radius: 10px;
     border-left: solid rgb(153, 184, 181) 20px; 
-    border-right: solid rgb(153, 184, 181) 20px; 
+    border-right: solid rgb(153, 184, 181) 20px;
 
     
 }
