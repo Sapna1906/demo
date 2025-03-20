@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
-    <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
+    <div class="Heading"><h1>Welcome To NutriLens!</h1>
+        <img class="mg" src="magnify-removebg-preview.png" alt="">
+    </div>
+    
     <br>
     <div class="container">
         <div class="swiper">
@@ -58,7 +61,7 @@
         <div class="info-box green">Sodium</div>
     </div>
 
-    <br><br>
+    
 
     <div class="b2">
         <label for="ingredientsList">Ingredients List:</label>
@@ -75,6 +78,27 @@
         Coloring e-150d,<br>
         Acidulant (phosphoric acid),<br>
         Natural flavorings (contains caffeine)
+    </div>
+    
+    <div class="b3">
+        <label for="ingreAnalysis">Ingredients Analysis:</label>
+        <select id="ingreAnalysis" onchange="toggleVisibility('ingDetails')">
+            <option value=""></option>
+            <option value="coca_cola">Display</option>
+        </select>
+    </div>
+
+    <div id="ingDetails" class="hidden" style="margin-top: 10px;">
+        <!-- <div class="hd"><b>Product Name - Coca Cola 2l</b></div> -->
+        <b>1. Added sugar -</b><br>
+        . Added sugars are sugars that are added to foods during processing, cooking, or before eating, and include things like table sugar, honey, syrups, and concentrated fruit juices.<br>
+        . Excessive consumption of added sugars can lead to various health problems, including tooth decay, obesity, type 2 diabetes, heart disease, and high triglyceride levels.<br>
+        <b>2. Carbonated water - </b><br>
+        . Carbonated water can cause bloating because the bubbles get trapped in your gastrointestinal tract.<br>
+        . If you're prone to bloating, you should avoid carbonated drinks. <br>
+        . Carbonated water can erode tooth enamel over time, especially if consumed in excess. 
+
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
     <script>
