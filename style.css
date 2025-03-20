@@ -11,35 +11,66 @@ body{
     font-family: "Lilita One", sans-serif;
   font-weight: 400;
   font-style: normal;
-    text-align: center;
-            padding: 20px;
+  
+    flex-wrap: wrap;
+    justify-content: center; 
+    font-size: 6vw;
 }
 .mg{
-    margin-top: 12px;
-    width: 50px;
-    height: 50px;
+    margin-top: 40px;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
 }
 .container{
     display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
 .swiper{
-    /* width: 80%; */
-    height: fit-content;
+    display: flex;
+    justify-content: center; /* Center the slides */
+    width: auto;             /* Adjust width dynamically */
+    height: fit-content; 
+    
 }
+.swiper-slide {
+    display: flex;
+    justify-content: center; /* Center the image */
+}
+
 .swiper-slide img{
-    width: 300px;
-    height: 200px;
+     width: 300px;
+    height: 200px; 
+    object-fit: cover;
     border: solid rgb(153, 184, 181) 5px;
     border-radius: 10px;
     border-left: solid rgb(153, 184, 181) 20px; 
     border-right: solid rgb(153, 184, 181) 20px;
-
+    justify-content: center;
+    
     
 }
+.searchbar {
+    display: flex;
+    justify-content: center; /* Center search bar */
+    margin: 20px 0;
+}
+
+#searchInput {
+    width: 100%; /* Use full width on smaller screens */
+    max-width: 400px; /* Limit for larger screens */
+    padding: 8px;
+    box-sizing: border-box; /* Ensure padding is included */
+}
+
 .line{
     font-family: "Barriecito", system-ui;
     font-weight: 100;
     font-style: normal;
+    font-size: 2vw;
+    justify-content: center;
+
 }
 .info-box {
     display: inline-block;
@@ -50,7 +81,7 @@ body{
 }
 .red { background-color: red; }
 .green { background-color: green; }
-.b1{
+/* .b1{
     background-color: antiquewhite;
     width: fit-content;
     font-family: "Lilita One", sans-serif;
@@ -76,7 +107,53 @@ body{
   font-style: normal; 
   text-align: center;
             margin: 20px 0; 
+} */
+.b1, .b2, .b3 {
+    background-color: antiquewhite;
+    width: 90%; /* Adapt to screen size */
+    font-family: "Lilita One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  text-align: center;
+    max-width: 600px; /* Limit for larger screens */
+    margin: 20px auto; /* Centered and responsive */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Ensure padding doesn’t affect width */
 }
+
 .hidden {
     display: none;
+}
+/* Small screens (phones) */
+@media (max-width: 600px) {
+    .Heading {
+        flex-direction: column; /* Stack heading vertically */
+    }
+
+    .mg {
+        width: 30px; 
+        height: 30px; /* Reduce icon size */
+    }
+
+    .swiper-slide img {
+        max-width: 90%; /* Smaller images on mobile */
+    }
+
+    .b1, .b2, .b3 {
+        width: 100%; /* Full width for small screens */
+    }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 900px) {
+    .Heading h1 {
+        font-size: 4vw; /* Moderate heading size */
+    }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1200px) {
+    .Heading h1 {
+        font-size: 3rem; /* Keep large headings */
+    }
 }
