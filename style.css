@@ -7,9 +7,15 @@ body{
     background-color: rgb(171, 212, 203);
 }
 .Heading{
+    display: flex;
     font-family: "Lilita One", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+.mg{
+    margin-top: 12px;
+    width: 50px;
+    height: 50px;
 }
 .container{
     display: flex;
@@ -48,6 +54,8 @@ body{
     font-family: "Lilita One", sans-serif;
   font-weight: 100;
   font-style: normal;
+  text-align: center;
+            margin: 20px 0;
 }
 .b2{
     background-color: antiquewhite;
@@ -55,6 +63,17 @@ body{
     font-family: "Lilita One", sans-serif;
   font-weight: 100;
   font-style: normal;
+  text-align: center;
+            margin: 20px 0;
+}
+.b3{
+    background-color: antiquewhite;
+    width: fit-content; 
+    font-family: "Lilita One", sans-serif;
+  font-weight: 100;
+  font-style: normal; 
+  text-align: center;
+            margin: 20px 0; 
 }
 .hidden {
     display: none;
