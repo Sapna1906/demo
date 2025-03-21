@@ -45,7 +45,7 @@
     
     
     
-    <div class="b1">
+    <!-- <div class="b1">
         <label for="healthRatings">Health Ratings:</label>
         <select id="healthRatings" onchange="toggleVisibility('healthDetails')">
             <option value=""></option>
@@ -89,8 +89,8 @@
     </div>
 
     <div id="ingDetails" class="hidden" style="margin-top: 10px;">
-        <!-- <div class="hd"><b>Product Name - Coca Cola 2l</b></div> -->
-        <b>1. Added sugar -</b><br>
+         <div class="hd"><b>Product Name - Coca Cola 2l</b></div> -->
+        <!-- <b>1. Added sugar -</b><br>
         . Added sugars are sugars that are added to foods during processing, cooking, or before eating, and include things like table sugar, honey, syrups, and concentrated fruit juices.<br>
         . Excessive consumption of added sugars can lead to various health problems, including tooth decay, obesity, type 2 diabetes, heart disease, and high triglyceride levels.<br>
         <b>2. Carbonated water - </b><br>
@@ -100,6 +100,78 @@
 
 
     </div>
+    <div class="b4">
+        <label for="calories">Calorie Counter:</label>
+        <select id="calories" onchange="toggleVisibility('calcount')">
+            <option value=""></option>
+            <option value="coca_cola">Display</option>
+        </select>
+    </div>
+
+    <div id="calcount" class="hidden" style="margin-top: 10px;">
+        <div class="hd"><b>150</b></div>
+        
+    </div> --> 
+    <div class="dropdown-container">
+        <div class="dropdown-box">
+            <label for="healthRatings">Health Ratings:</label>
+            <select id="healthRatings" onchange="toggleVisibility('healthDetails')">
+                <option value=""></option>
+                <option value="coca_cola">Display</option>
+            </select>
+            <div id="healthDetails" class="hidden" style="margin-top: 10px;">
+                <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
+                <div class="info-box red">Sugar</div>
+                <div class="info-box green">Trans Fat</div>
+                <div class="info-box green">Sodium</div>
+            </div>
+        </div>
+    
+        <div class="dropdown-box">
+            <label for="ingredientsList">Ingredients List:</label>
+            <select id="ingredientsList" onchange="toggleVisibility('ingredientsDetails')">
+                <option value=""></option>
+                <option value="coca_cola">Display</option>
+            </select>
+            <div id="ingredientsDetails" class="hidden" style="margin-top: 10px;">
+                <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
+                Carbonated water,<br>
+                Sugar,<br>
+                Coloring e-150d,<br>
+                Acidulant (phosphoric acid),<br>
+                Natural flavorings (contains caffeine)
+            </div>
+        </div>
+    
+        <div class="dropdown-box">
+            <label for="ingreAnalysis">Ingredients Analysis:</label>
+            <select id="ingreAnalysis" onchange="toggleVisibility('ingDetails')">
+                <option value=""></option>
+                <option value="coca_cola">Display</option>
+            </select>
+            <div id="ingDetails" class="hidden" style="margin-top: 10px;">
+                <b>1. Added sugar -</b><br>
+                . Added sugars are sugars that are added to foods during processing, cooking, or before eating, and include things like table sugar, honey, syrups, and concentrated fruit juices.<br>
+                . Excessive consumption of added sugars can lead to various health problems, including tooth decay, obesity, type 2 diabetes, heart disease, and high triglyceride levels.<br>
+                <b>2. Carbonated water - </b><br>
+                . Carbonated water can cause bloating because the bubbles get trapped in your gastrointestinal tract.<br>
+                . If you're prone to bloating, you should avoid carbonated drinks. <br>
+                . Carbonated water can erode tooth enamel over time, especially if consumed in excess.
+            </div>
+        </div>
+    
+        <div class="dropdown-box">
+            <label for="calories">Calorie Counter:</label>
+            <select id="calories" onchange="toggleVisibility('calcount')">
+                <option value=""></option>
+                <option value="coca_cola">Display</option>
+            </select>
+            <div id="calcount" class="hidden" style="margin-top: 10px;">
+                <div class="hd"><b>150</b></div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
     <script>
         function search() {
