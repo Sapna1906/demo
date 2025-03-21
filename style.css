@@ -108,17 +108,22 @@ body{
   text-align: center;
             margin: 20px 0; 
 } */
-.b1, .b2, .b3 {
+
+.dropdown-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between boxes */
+    justify-content: center; /* Center boxes horizontally */
+}
+
+.dropdown-box {
+    flex: 1 1 calc(50% - 20px); /* Each box takes 50% width minus gap */
     background-color: antiquewhite;
-    width: 90%; /* Adapt to screen size */
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
     font-family: "Lilita One", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  text-align: center;
-    max-width: 600px; /* Limit for larger screens */
-    margin: 20px auto; /* Centered and responsive */
-    padding: 10px; /* Add padding for better spacing */
-    box-sizing: border-box; /* Ensure padding doesn’t affect width */
+    border-radius: 8px; /* Rounded corners */
 }
 
 .hidden {
@@ -131,6 +136,7 @@ body{
     }
 
     .mg {
+        margin-top: 12px;
         width: 30px; 
         height: 30px; /* Reduce icon size */
     }
@@ -139,8 +145,8 @@ body{
         max-width: 90%; /* Smaller images on mobile */
     }
 
-    .b1, .b2, .b3 {
-        width: 100%; /* Full width for small screens */
+    .dropdown-box {
+        flex: 1 1 100%; /* Full width on small screens */
     }
 }
 
