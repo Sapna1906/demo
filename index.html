@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
+    <div class="navbar">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="menu hidden">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
     <div class="Heading"><h1>Welcome To NutriLens!</h1>
-        <img class="mg" src="magnify-removebg-preview.png" alt="">
+        <!-- <img class="mg" src="magnify-removebg-preview.png" alt=""> -->
     </div>
     
     <br>
@@ -34,7 +43,7 @@
     </div>
     <!-- <img class="balance" src="bd.jpg" alt=""> -->
     <br><br>
-    <div class="line">Discover food insights</div>
+    <div class="line"><h3>Discover food insights</h3></div>
     <br>
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
@@ -187,6 +196,10 @@
                 element.classList.add('hidden');
             }
         }
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('hidden');
+        }
+
         const swiper = new Swiper('.swiper', {
             autoplay: {
                 delay: 5000,
