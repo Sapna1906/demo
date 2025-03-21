@@ -14,7 +14,7 @@ body{
   
     flex-wrap: wrap;
     justify-content: center; 
-    font-size: 6vw;
+    /* font-size: 6vw; */
 }
 .mg{
     margin-top: 40px;
@@ -68,7 +68,7 @@ body{
     font-family: "Barriecito", system-ui;
     font-weight: 100;
     font-style: normal;
-    font-size: 2vw;
+    /* font-size: 2vw; */
     justify-content: center;
 
 }
