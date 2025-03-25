@@ -81,33 +81,7 @@ body{
 }
 .red { background-color: red; }
 .green { background-color: green; }
-/* .b1{
-    background-color: antiquewhite;
-    width: fit-content;
-    font-family: "Lilita One", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  text-align: center;
-            margin: 20px 0;
-}
-.b2{
-    background-color: antiquewhite;
-    width: fit-content; 
-    font-family: "Lilita One", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  text-align: center;
-            margin: 20px 0;
-}
-.b3{
-    background-color: antiquewhite;
-    width: fit-content; 
-    font-family: "Lilita One", sans-serif;
-  font-weight: 100;
-  font-style: normal; 
-  text-align: center;
-            margin: 20px 0; 
-} */
+
 
 .dropdown-container {
     display: flex;
