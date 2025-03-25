@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NutriLens</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
@@ -17,214 +17,114 @@
         </div>
     </div>
 
-    <div class="Heading"><h1>Welcome To NutriLens!</h1>
-        <!-- <img class="mg" src="magnify-removebg-preview.png" alt=""> -->
-    </div>
-    
-    <br>
+    <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
+
     <div class="container">
         <div class="swiper">
-            
             <div class="swiper-wrapper">
-              
-              <div class="swiper-slide"><img src="bd.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="choice.jpg" alt=""></div>
-              <div class="swiper-slide"><img src="healthy-eating-habits-1024x689.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="bd.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="choice.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="healthy-eating-habits-1024x689.jpg" alt=""></div>
             </div>
-            
-            <!-- <div class="swiper-pagination"></div>
-          
-        
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div> -->
-          
-            
-          </div>
+        </div>
     </div>
-    <!-- <img class="balance" src="bd.jpg" alt=""> -->
-    <br><br>
+
     <div class="line"><h3>Discover food insights</h3></div>
-    <br>
+
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
         <button id="searchButton" onclick="search()">Search</button>
     </div>
-    
-    
-    
-    
-    
-    <!-- <div class="b1">
-        <label for="healthRatings">Health Ratings:</label>
-        <select id="healthRatings" onchange="toggleVisibility('healthDetails')">
-            <option value=""></option>
-            <option value="coca_cola">Display</option>
-            
-        </select>
-    </div>
 
-    <div id="healthDetails" class="hidden" style="margin-top: 10px;">
-        <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
-        <div class="info-box red">Sugar</div>
-        <div class="info-box green">Trans Fat</div>
-        <div class="info-box green">Sodium</div>
-    </div>
-
-    
-
-    <div class="b2">
-        <label for="ingredientsList">Ingredients List:</label>
-        <select id="ingredientsList" onchange="toggleVisibility('ingredientsDetails')">
-            <option value=""></option>
-            <option value="coca_cola">Display</option>
-        </select>
-    </div>
-
-    <div id="ingredientsDetails" class="hidden" style="margin-top: 10px;">
-        <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
-        Carbonated water,<br>
-        Sugar,<br>
-        Coloring e-150d,<br>
-        Acidulant (phosphoric acid),<br>
-        Natural flavorings (contains caffeine)
-    </div>
-    
-    <div class="b3">
-        <label for="ingreAnalysis">Ingredients Analysis:</label>
-        <select id="ingreAnalysis" onchange="toggleVisibility('ingDetails')">
-            <option value=""></option>
-            <option value="coca_cola">Display</option>
-        </select>
-    </div>
-
-    <div id="ingDetails" class="hidden" style="margin-top: 10px;">
-         <div class="hd"><b>Product Name - Coca Cola 2l</b></div> -->
-        <!-- <b>1. Added sugar -</b><br>
-        . Added sugars are sugars that are added to foods during processing, cooking, or before eating, and include things like table sugar, honey, syrups, and concentrated fruit juices.<br>
-        . Excessive consumption of added sugars can lead to various health problems, including tooth decay, obesity, type 2 diabetes, heart disease, and high triglyceride levels.<br>
-        <b>2. Carbonated water - </b><br>
-        . Carbonated water can cause bloating because the bubbles get trapped in your gastrointestinal tract.<br>
-        . If you're prone to bloating, you should avoid carbonated drinks. <br>
-        . Carbonated water can erode tooth enamel over time, especially if consumed in excess. 
-
-
-    </div>
-    <div class="b4">
-        <label for="calories">Calorie Counter:</label>
-        <select id="calories" onchange="toggleVisibility('calcount')">
-            <option value=""></option>
-            <option value="coca_cola">Display</option>
-        </select>
-    </div>
-
-    <div id="calcount" class="hidden" style="margin-top: 10px;">
-        <div class="hd"><b>150</b></div>
-        
-    </div> --> 
     <div class="dropdown-container">
-        <div class="dropdown-box">
-            <label for="healthRatings">Health Ratings:</label>
-            <select id="healthRatings" onchange="toggleVisibility('healthDetails')">
-                <option value=""></option>
-                <option value="coca_cola">Display</option>
-            </select>
-            <div id="healthDetails" class="hidden" style="margin-top: 10px;">
-                <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
-                <div class="info-box red">Sugar</div>
-                <div class="info-box green">Trans Fat</div>
-                <div class="info-box green">Sodium</div>
-            </div>
+        <div class="dropdown-box" id="healthRatingsBox">
+            <label>Health Ratings:</label>
+            <div id="healthDetails" class="hidden"></div>
         </div>
-    
-        <div class="dropdown-box">
-            <label for="ingredientsList">Ingredients List:</label>
-            <select id="ingredientsList" onchange="toggleVisibility('ingredientsDetails')">
-                <option value=""></option>
-                <option value="coca_cola">Display</option>
-            </select>
-            <div id="ingredientsDetails" class="hidden" style="margin-top: 10px;">
-                <div class="hd"><b>Product Name - Coca Cola 2l</b></div>
-                Carbonated water,<br>
-                Sugar,<br>
-                Coloring e-150d,<br>
-                Acidulant (phosphoric acid),<br>
-                Natural flavorings (contains caffeine)
-            </div>
+
+        <div class="dropdown-box" id="ingredientsListBox">
+            <label>Ingredients List:</label>
+            <div id="ingredientsDetails" class="hidden"></div>
         </div>
-    
-        <div class="dropdown-box">
-            <label for="ingreAnalysis">Ingredients Analysis:</label>
-            <select id="ingreAnalysis" onchange="toggleVisibility('ingDetails')">
-                <option value=""></option>
-                <option value="coca_cola">Display</option>
-            </select>
-            <div id="ingDetails" class="hidden" style="margin-top: 10px;">
-                <b>1. Added sugar -</b><br>
-                . Added sugars are sugars that are added to foods during processing, cooking, or before eating, and include things like table sugar, honey, syrups, and concentrated fruit juices.<br>
-                . Excessive consumption of added sugars can lead to various health problems, including tooth decay, obesity, type 2 diabetes, heart disease, and high triglyceride levels.<br>
-                <b>2. Carbonated water - </b><br>
-                . Carbonated water can cause bloating because the bubbles get trapped in your gastrointestinal tract.<br>
-                . If you're prone to bloating, you should avoid carbonated drinks. <br>
-                . Carbonated water can erode tooth enamel over time, especially if consumed in excess.
-            </div>
+
+        <div class="dropdown-box" id="ingreAnalysisBox">
+            <label>Ingredients Analysis:</label>
+            <div id="ingDetails" class="hidden"></div>
         </div>
-    
-        <div class="dropdown-box">
-            <label for="calories">Calorie Counter:</label>
-            <select id="calories" onchange="toggleVisibility('calcount')">
-                <option value=""></option>
-                <option value="coca_cola">Display</option>
-            </select>
-            <div id="calcount" class="hidden" style="margin-top: 10px;">
-                <div class="hd"><b>150</b></div>
-            </div>
+
+        <div class="dropdown-box" id="caloriesBox">
+            <label>Calorie Counter:</label>
+            <div id="calcount" class="hidden"></div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        function search() {
-            const input = document.getElementById('searchInput').value;
-            console.log("You searched for:", input);
-        }
-
-        function toggleVisibility(id) {
-            const element = document.getElementById(id);
-            if (element.classList.contains('hidden')) {
-                element.classList.remove('hidden');
-            } else {
-                element.classList.add('hidden');
-            }
-        }
         function toggleMenu() {
             document.querySelector('.menu').classList.toggle('hidden');
         }
 
         const swiper = new Swiper('.swiper', {
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-  
-  loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            loop: true,
+        });
 
-//   // If we need pagination
-//   pagination: {
-//     el: '.swiper-pagination',
-//     clickable: true,
-//   },
+        async function search() {
+            const barcode = document.getElementById('searchInput').value.trim();
+            if (!barcode) {
+                alert('Please enter a barcode!');
+                return;
+            }
 
-//   // Navigation arrows
-//   navigation: {
-//     nextEl: '.swiper-button-next',
-//     prevEl: '.swiper-button-prev',
-//   },
-});
+            try {
+                const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcode}.json`);
+                const data = await response.json();
+
+                if (!data.product) {
+                    alert('Product not found. Please try another barcode.');
+                    return;
+                }
+
+                displayProductDetails(data.product);
+
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+                alert('Error fetching product details. Please try again later.');
+            }
+        }
+
+        function displayProductDetails(product) {
+            // Display Health Ratings
+            const healthDetails = document.getElementById('healthDetails');
+            healthDetails.innerHTML = `
+                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
+                <div class="info-box ${product.nutriments.sugars ? 'red' : 'green'}">Sugar: ${product.nutriments.sugars || 'N/A'} g</div>
+                <div class="info-box ${product.nutriments.fat ? 'red' : 'green'}">Fat: ${product.nutriments.fat || 'N/A'} g</div>
+                <div class="info-box ${product.nutriments.sodium ? 'red' : 'green'}">Sodium: ${product.nutriments.sodium || 'N/A'} mg</div>
+            `;
+            healthDetails.classList.remove('hidden');
+
+            // Display Ingredients List
+            const ingredientsDetails = document.getElementById('ingredientsDetails');
+            ingredientsDetails.innerHTML = `
+                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
+                ${product.ingredients_text || 'No ingredients available'}
+            `;
+            ingredientsDetails.classList.remove('hidden');
+
+            // Display Ingredients Analysis
+            const ingDetails = document.getElementById('ingDetails');
+            ingDetails.innerHTML = `
+                <b>Potential Concerns:</b><br>
+                ${product.additives_tags.map(additive => `• ${additive.replace('en:', '').toUpperCase()}`).join('<br>') || 'None'}
+            `;
+            ingDetails.classList.remove('hidden');
+
+            // Display Calorie Counter
+            const calcount = document.getElementById('calcount');
+            calcount.innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
+            calcount.classList.remove('hidden');
+        }
     </script>
-
-
-    
-
-    
 </body>
 </html>
