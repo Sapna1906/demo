@@ -6,6 +6,7 @@
     <title>NutriLens</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src = "./qrcode/html5-qrcode/html5-qrcode.min.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -31,10 +32,14 @@
 
     <div class="line"><h3>Discover food insights</h3></div>
 
+    <div id = "reader"></div>
+    
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
         <button id="searchButton" onclick="search()">Search</button>
     </div>
+
+    <div id = "result"></div>
 
     <div class="dropdown-container">
         <div class="dropdown-box" id="healthRatingsBox">
@@ -125,6 +130,32 @@
             calcount.innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
             calcount.classList.remove('hidden');
         }
+
+        // yha niche hai QR scanner ke liye
+        const scanner = new Html5QrcodeScanner('reader', {
+            qrbox: { 
+                width: 250, 
+                height: 250,
+            },
+            fps: 20,
+        });
+
+        scanner.render(success, error);
+
+        function success(decodedText) {
+            document.getElementById("searchInput").value = decodedText;
+            document.getElementById("result").innerHTML = `Success! Decoded Text: ${decodedText}`;
+
+            scanner.clear();
+            document.getElementsById("reader").remove();
+            search(decodedText);
+        }
+
+        function error(error) {
+            document.getElementById("result").innerHTML = `Error : ${decodedText}`;
+            console.log(error);
+        }
+
     </script>
 </body>
 </html>
