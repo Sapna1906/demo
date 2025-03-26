@@ -20,11 +20,9 @@
 
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
-        <button id="scanQRButton">Scan QR Code</button>
+        <button id="scanQRButton">Scan with Google Lens</button>
         <button id="searchButton" onclick="search()">Search</button>
     </div>
-
-    <video id="qr-video" class="hidden"></video>
 
     <script>
         function toggleMenu() {
@@ -54,40 +52,9 @@
             }
         }
 
-        async function scanQRCode() {
-            if (!('BarcodeDetector' in window)) {
-                alert('QR Scanner is not supported in this browser.');
-                return;
-            }
-
-            const video = document.getElementById('qr-video');
-            video.classList.remove('hidden');
-
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-            video.srcObject = stream;
-            video.play();
-
-            const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
-
-            const scanLoop = async () => {
-                try {
-                    const barcodes = await barcodeDetector.detect(video);
-                    if (barcodes.length > 0) {
-                        document.getElementById('searchInput').value = barcodes[0].rawValue;
-                        stream.getTracks().forEach(track => track.stop());
-                        video.classList.add('hidden');
-                    } else {
-                        requestAnimationFrame(scanLoop);
-                    }
-                } catch (error) {
-                    console.error('QR code scanning error:', error);
-                }
-            };
-
-            scanLoop();
-        }
-
-        document.getElementById('scanQRButton').addEventListener('click', scanQRCode);
+        document.getElementById('scanQRButton').addEventListener('click', () => {
+            window.location.href = 'https://lens.google.com/';
+        });
     </script>
 </body>
 </html>
