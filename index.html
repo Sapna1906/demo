@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriLens</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
     <div class="navbar">
@@ -19,56 +18,18 @@
 
     <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
 
-    <div class="container">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="bd.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="choice.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="healthy-eating-habits-1024x689.jpg" alt=""></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="line"><h3>Discover food insights</h3></div>
-
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
-        <button id="uploadButton">Upload & Scan</button>
+        <button id="scanQRButton">Scan QR Code</button>
         <button id="searchButton" onclick="search()">Search</button>
     </div>
 
-    <div class="dropdown-container">
-        <div class="dropdown-box" id="healthRatingsBox">
-            <label>Health Ratings:</label>
-            <div id="healthDetails" class="hidden"></div>
-        </div>
+    <video id="qr-video" class="hidden"></video>
 
-        <div class="dropdown-box" id="ingredientsListBox">
-            <label>Ingredients List:</label>
-            <div id="ingredientsDetails" class="hidden"></div>
-        </div>
-
-        <div class="dropdown-box" id="ingreAnalysisBox">
-            <label>Ingredients Analysis:</label>
-            <div id="ingDetails" class="hidden"></div>
-        </div>
-
-        <div class="dropdown-box" id="caloriesBox">
-            <label>Calorie Counter:</label>
-            <div id="calcount" class="hidden"></div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         function toggleMenu() {
             document.querySelector('.menu').classList.toggle('hidden');
         }
-
-        const swiper = new Swiper('.swiper', {
-            autoplay: { delay: 5000, disableOnInteraction: false },
-            loop: true,
-        });
 
         async function search() {
             const barcode = document.getElementById('searchInput').value.trim();
@@ -86,92 +47,47 @@
                     return;
                 }
 
-                displayProductDetails(data.product);
-
+                alert(`Product Name: ${data.product.product_name || 'N/A'}`);
             } catch (error) {
                 console.error('Error fetching product details:', error);
                 alert('Error fetching product details. Please try again later.');
             }
         }
 
-        function displayProductDetails(product) {
-            document.getElementById('healthDetails').innerHTML = `
-                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
-                <div class="info-box ${product.nutriments.sugars ? 'red' : 'green'}">Sugar: ${product.nutriments.sugars || 'N/A'} g</div>
-                <div class="info-box ${product.nutriments.fat ? 'red' : 'green'}">Fat: ${product.nutriments.fat || 'N/A'} g</div>
-                <div class="info-box ${product.nutriments.sodium ? 'red' : 'green'}">Sodium: ${product.nutriments.sodium || 'N/A'} mg</div>
-            `;
-            document.getElementById('healthDetails').classList.remove('hidden');
+        async function scanQRCode() {
+            if (!('BarcodeDetector' in window)) {
+                alert('QR Scanner is not supported in this browser.');
+                return;
+            }
 
-            document.getElementById('ingredientsDetails').innerHTML = `
-                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
-                ${product.ingredients_text || 'No ingredients available'}
-            `;
-            document.getElementById('ingredientsDetails').classList.remove('hidden');
+            const video = document.getElementById('qr-video');
+            video.classList.remove('hidden');
 
-            document.getElementById('ingDetails').innerHTML = `
-                <b>Potential Concerns:</b><br>
-                ${product.additives_tags.map(additive => `• ${additive.replace('en:', '').toUpperCase()}`).join('<br>') || 'None'}
-            `;
-            document.getElementById('ingDetails').classList.remove('hidden');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+            video.srcObject = stream;
+            video.play();
 
-            document.getElementById('calcount').innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
-            document.getElementById('calcount').classList.remove('hidden');
-        }
+            const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
 
-        // QR Code Scanning Integration
-        async function selectImage() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = async (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    scanQRCode(file);
+            const scanLoop = async () => {
+                try {
+                    const barcodes = await barcodeDetector.detect(video);
+                    if (barcodes.length > 0) {
+                        document.getElementById('searchInput').value = barcodes[0].rawValue;
+                        stream.getTracks().forEach(track => track.stop());
+                        video.classList.add('hidden');
+                    } else {
+                        requestAnimationFrame(scanLoop);
+                    }
+                } catch (error) {
+                    console.error('QR code scanning error:', error);
                 }
             };
-            input.click();
+
+            scanLoop();
         }
 
-        async function scanQRCode(file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = async () => {
-                const image = new Image();
-                image.src = reader.result;
-                image.onload = async () => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = image.width;
-                    canvas.height = image.height;
-                    ctx.drawImage(image, 0, 0, image.width, image.height);
-                    
-                    const code = await detectQRCode(canvas);
-                    if (code) {
-                        document.getElementById('searchInput').value = code;
-                    } else {
-                        alert('No QR Code detected.');
-                    }
-                };
-            };
-        }
-
-        async function detectQRCode(canvas) {
-            try {
-                const worker = await Tesseract.createWorker();
-                await worker.loadLanguage('eng');
-                await worker.initialize('eng');
-                const { data: { text } } = await worker.recognize(canvas);
-                await worker.terminate();
-                return text.trim();
-            } catch (error) {
-                console.error('Error detecting QR code:', error);
-                return null;
-            }
-        }
-
-        document.getElementById('uploadButton').addEventListener('click', selectImage);
+        document.getElementById('scanQRButton').addEventListener('click', scanQRCode);
     </script>
-    <script src="https://unpkg.com/tesseract.js"></script>
 </body>
 </html>
