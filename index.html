@@ -33,6 +33,7 @@
 
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
+        <button id="uploadButton">Upload & Scan</button>
         <button id="searchButton" onclick="search()">Search</button>
     </div>
 
@@ -94,37 +95,83 @@
         }
 
         function displayProductDetails(product) {
-            // Display Health Ratings
-            const healthDetails = document.getElementById('healthDetails');
-            healthDetails.innerHTML = `
+            document.getElementById('healthDetails').innerHTML = `
                 <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
                 <div class="info-box ${product.nutriments.sugars ? 'red' : 'green'}">Sugar: ${product.nutriments.sugars || 'N/A'} g</div>
                 <div class="info-box ${product.nutriments.fat ? 'red' : 'green'}">Fat: ${product.nutriments.fat || 'N/A'} g</div>
                 <div class="info-box ${product.nutriments.sodium ? 'red' : 'green'}">Sodium: ${product.nutriments.sodium || 'N/A'} mg</div>
             `;
-            healthDetails.classList.remove('hidden');
+            document.getElementById('healthDetails').classList.remove('hidden');
 
-            // Display Ingredients List
-            const ingredientsDetails = document.getElementById('ingredientsDetails');
-            ingredientsDetails.innerHTML = `
+            document.getElementById('ingredientsDetails').innerHTML = `
                 <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
                 ${product.ingredients_text || 'No ingredients available'}
             `;
-            ingredientsDetails.classList.remove('hidden');
+            document.getElementById('ingredientsDetails').classList.remove('hidden');
 
-            // Display Ingredients Analysis
-            const ingDetails = document.getElementById('ingDetails');
-            ingDetails.innerHTML = `
+            document.getElementById('ingDetails').innerHTML = `
                 <b>Potential Concerns:</b><br>
                 ${product.additives_tags.map(additive => `• ${additive.replace('en:', '').toUpperCase()}`).join('<br>') || 'None'}
             `;
-            ingDetails.classList.remove('hidden');
+            document.getElementById('ingDetails').classList.remove('hidden');
 
-            // Display Calorie Counter
-            const calcount = document.getElementById('calcount');
-            calcount.innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
-            calcount.classList.remove('hidden');
+            document.getElementById('calcount').innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
+            document.getElementById('calcount').classList.remove('hidden');
         }
+
+        // QR Code Scanning Integration
+        async function selectImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    scanQRCode(file);
+                }
+            };
+            input.click();
+        }
+
+        async function scanQRCode(file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = async () => {
+                const image = new Image();
+                image.src = reader.result;
+                image.onload = async () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    ctx.drawImage(image, 0, 0, image.width, image.height);
+                    
+                    const code = await detectQRCode(canvas);
+                    if (code) {
+                        document.getElementById('searchInput').value = code;
+                    } else {
+                        alert('No QR Code detected.');
+                    }
+                };
+            };
+        }
+
+        async function detectQRCode(canvas) {
+            try {
+                const worker = await Tesseract.createWorker();
+                await worker.loadLanguage('eng');
+                await worker.initialize('eng');
+                const { data: { text } } = await worker.recognize(canvas);
+                await worker.terminate();
+                return text.trim();
+            } catch (error) {
+                console.error('Error detecting QR code:', error);
+                return null;
+            }
+        }
+
+        document.getElementById('uploadButton').addEventListener('click', selectImage);
     </script>
+    <script src="https://unpkg.com/tesseract.js"></script>
 </body>
 </html>
