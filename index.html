@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriLens</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src = "./node_modules/html5-qrcode/html5-qrcode.min.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -18,18 +20,59 @@
 
     <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
 
+    <div class="container">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="bd.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="choice.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="healthy-eating-habits-1024x689.jpg" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="line"><h3>Discover food insights</h3></div>
+
+    <div id = "reader"></div>
+    
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
-        <a href="intent://scan/#Intent;scheme=googlelens;package=com.google.ar.lens;end">
-            <button id="help">Scan with Google Lens</button>
-        </a>
         <button id="searchButton" onclick="search()">Search</button>
     </div>
 
+    <div id = "result"></div>
+
+    <div class="dropdown-container">
+        <div class="dropdown-box" id="healthRatingsBox">
+            <label>Health Ratings:</label>
+            <div id="healthDetails" class="hidden"></div>
+        </div>
+
+        <div class="dropdown-box" id="ingredientsListBox">
+            <label>Ingredients List:</label>
+            <div id="ingredientsDetails" class="hidden"></div>
+        </div>
+
+        <div class="dropdown-box" id="ingreAnalysisBox">
+            <label>Ingredients Analysis:</label>
+            <div id="ingDetails" class="hidden"></div>
+        </div>
+
+        <div class="dropdown-box" id="caloriesBox">
+            <label>Calorie Counter:</label>
+            <div id="calcount" class="hidden"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         function toggleMenu() {
             document.querySelector('.menu').classList.toggle('hidden');
         }
+
+        const swiper = new Swiper('.swiper', {
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            loop: true,
+        });
 
         async function search() {
             const barcode = document.getElementById('searchInput').value.trim();
@@ -47,16 +90,72 @@
                     return;
                 }
 
-                alert(`Product Name: ${data.product.product_name || 'N/A'}`);
+                displayProductDetails(data.product);
+
             } catch (error) {
                 console.error('Error fetching product details:', error);
                 alert('Error fetching product details. Please try again later.');
             }
         }
 
-        document.getElementById('scanQRButton').addEventListener('click', () => {
-            window.location.href = 'https://lens.google.com/';
+        function displayProductDetails(product) {
+            // Display Health Ratings
+            const healthDetails = document.getElementById('healthDetails');
+            healthDetails.innerHTML = `
+                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
+                <div class="info-box ${product.nutriments.sugars ? 'red' : 'green'}">Sugar: ${product.nutriments.sugars || 'N/A'} g</div>
+                <div class="info-box ${product.nutriments.fat ? 'red' : 'green'}">Fat: ${product.nutriments.fat || 'N/A'} g</div>
+                <div class="info-box ${product.nutriments.sodium ? 'red' : 'green'}">Sodium: ${product.nutriments.sodium || 'N/A'} mg</div>
+            `;
+            healthDetails.classList.remove('hidden');
+
+            // Display Ingredients List
+            const ingredientsDetails = document.getElementById('ingredientsDetails');
+            ingredientsDetails.innerHTML = `
+                <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
+                ${product.ingredients_text || 'No ingredients available'}
+            `;
+            ingredientsDetails.classList.remove('hidden');
+
+            // Display Ingredients Analysis
+            const ingDetails = document.getElementById('ingDetails');
+            ingDetails.innerHTML = `
+                <b>Potential Concerns:</b><br>
+                ${product.additives_tags.map(additive => `• ${additive.replace('en:', '').toUpperCase()}`).join('<br>') || 'None'}
+            `;
+            ingDetails.classList.remove('hidden');
+
+            // Display Calorie Counter
+            const calcount = document.getElementById('calcount');
+            calcount.innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
+            calcount.classList.remove('hidden');
+        }
+
+        // yha niche hai QR scanner ke liye
+        const scanner = new Html5QrcodeScanner('reader', {
+            qrbox: { 
+                width: 250, 
+                height: 250,
+            },
+            fps: 20,
         });
+
+        scanner.render(success, error);
+
+        function success(decodedText) {
+            document.getElementById("searchInput").value = decodedText;
+            document.getElementById("result").innerHTML = `Success! Decoded Text: ${decodedText}`;
+
+            scanner.clear();
+            document.getElementsById("reader").remove();
+            search(decodedText);
+        }
+
+        function error(error) {
+            document.getElementById("result").innerHTML = `Error : ${decodedText}`;
+            console.log(error);
+        }
+
     </script>
 </body>
 </html>
