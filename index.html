@@ -20,7 +20,9 @@
 
     <div class="searchbar">
         <input type="text" id="searchInput" placeholder="Enter barcode...">
-        <button id="scanQRButton">Scan with Google Lens</button>
+        <a href="intent://scan/#Intent;scheme=googlelens;package=com.google.ar.lens;end">
+            <button id="help">Scan with Google Lens</button>
+        </a>
         <button id="searchButton" onclick="search()">Search</button>
     </div>
 
