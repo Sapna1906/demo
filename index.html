@@ -46,6 +46,10 @@
             <label>Health Ratings:</label>
             <div id="healthDetails" class="hidden"></div>
         </div>
+        <div class="dropdown-box" id="nutriScoreBox">
+            <label>Nutri Score:</label>
+            <div id="nutriDetails" class="hidden"></div>
+        </div>
 
         <div class="dropdown-box" id="ingredientsListBox">
             <label>Ingredients List:</label>
@@ -97,17 +101,47 @@
                 alert('Error fetching product details. Please try again later.');
             }
         }
+        function getColorCode(value, thresholds) {
+            if (value <= thresholds.green) return 'green';
+            if (value <= thresholds.orange) return 'orange';
+            return 'red';
+        }
+
 
         function displayProductDetails(product) {
             // Display Health Ratings
+           const sugar = product.nutriments["sugars"] || 0;
+            const transFats = product.nutriments["trans-fat"] || 0;
+            const sodium = product.nutriments.sodium || 0;
+
+            const sugarColor = getColorCode(sugar, { green: 5, orange: 10 });
+            const transFatColor = getColorCode(transFats, { green: 0.5, orange: 1 });
+            const sodiumColor = getColorCode(sodium, { green: 0.200, orange: 0.400 });
+
             const healthDetails = document.getElementById('healthDetails');
             healthDetails.innerHTML = `
                 <div class="hd"><b>Product Name - ${product.product_name || 'N/A'}</b></div>
-                <div class="info-box ${product.nutriments.sugars ? 'red' : 'green'}">Sugar: ${product.nutriments.sugars || 'N/A'} g</div>
-                <div class="info-box ${product.nutriments.fat ? 'red' : 'green'}">Fat: ${product.nutriments.fat || 'N/A'} g</div>
-                <div class="info-box ${product.nutriments.sodium ? 'red' : 'green'}">Sodium: ${product.nutriments.sodium || 'N/A'} mg</div>
+                <div class="info-box ${sugarColor}">Sugar: ${sugar} g</div>
+                <div class="info-box ${transFatColor}">Trans Fats: ${transFats} g</div>
+                <div class="info-box ${sodiumColor}">Sodium: ${sodium} g</div>
             `;
             healthDetails.classList.remove('hidden');
+            const nutriScoreBox = document.getElementById('nutriDetails');
+        const nutriScore = product.nutriscore_grade ? product.nutriscore_grade.toUpperCase() : 'N/A';
+
+        let colorClass = 'gray';
+        if (nutriScore === 'A') colorClass = 'green';
+        else if (nutriScore === 'B') colorClass = 'light-green';
+        else if (nutriScore === 'C') colorClass = 'yellow';
+        else if (nutriScore === 'D') colorClass = 'orange';
+        else if (nutriScore === 'E') colorClass = 'red';
+
+        nutriScoreBox.innerHTML = `
+            <div class="nutri-score ${colorClass}"><b>Nutri-Score: ${nutriScore}</b></div>
+        `;
+        nutriScoreBox.classList.remove('hidden');
+
+            
 
             // Display Ingredients List
             const ingredientsDetails = document.getElementById('ingredientsDetails');
@@ -127,8 +161,10 @@
 
             // Display Calorie Counter
             const calcount = document.getElementById('calcount');
-            calcount.innerHTML = `<div class="hd"><b>${product.nutriments.energy_kcal || 'N/A'} kcal</b></div>`;
-            calcount.classList.remove('hidden');
+        const calories = product.nutriments.energy_kcal_100g || product.nutriments.energy_kcal || 'Data not available';
+        
+        calcount.innerHTML = `<div class="calorie-box"><b>Calories: ${calories} kcal (per 100g)</b></div>`;
+        calcount.classList.remove('hidden');
         }
 
         // yha niche hai QR scanner ke liye
