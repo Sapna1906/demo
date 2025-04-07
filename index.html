@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src = "./qrcode/html5-qrcode/html5-qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -67,11 +66,7 @@
             <div id="calcount" class="hidden"></div>
         </div>
     </div>
-    <div class="fallback-section">
-        <label>Scan Ingredients (Image):</label>
-        <input type="file" id="imageInput" accept="image/*" onchange="scanIngredients()">
-        <div id="ocrResult"></div>
-    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -172,26 +167,7 @@
         calcount.innerHTML = `<div class="calorie-box"><b>Calories: ${calories} kcal (per 100g)</b></div>`;
         calcount.classList.remove('hidden');
         }
-        function scanIngredients() {
-            const file = document.getElementById('imageInput').files[0];
-            if (!file) return;
-
-            Tesseract.recognize(
-                file,
-                'eng',
-                { logger: m => console.log(m) }
-            ).then(({ data: { text } }) => {
-                const ingredientsDetails = document.getElementById('ingredientsDetails');
-                ingredientsDetails.innerHTML = `
-                    <div class="hd"><b>Scanned Ingredients</b></div>
-                    ${text}
-                `;
-                ingredientsDetails.classList.remove('hidden');
-            }).catch(err => {
-                alert("Could not scan the ingredients image.");
-                console.error(err);
-            });
-        }
+       
 
         // yha niche hai QR scanner ke liye
         const scanner = new Html5QrcodeScanner('reader', {
