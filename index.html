@@ -9,7 +9,7 @@
     <script src = "./qrcode/html5-qrcode/html5-qrcode.min.js"></script>
 </head>
 <body>
-      <div class="navbar">
+    <div class="navbar">
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="menu hidden">
             <a href="#">Home</a>
@@ -17,6 +17,7 @@
             <a href="#">Contact</a>
         </div>
     </div>
+    
 
     <div class="Heading"><h1>Welcome To NutriLens!</h1></div>
 
@@ -43,29 +44,70 @@
 
     <div class="dropdown-container">
         <div class="dropdown-box" id="healthRatingsBox">
-            <label>Health Ratings:</label>
+            <label><img src="shield-check-line.svg" alt=""> Health Ratings:</label>
             <div id="healthDetails" class="hidden"></div>
         </div>
+        
         <div class="dropdown-box" id="nutriScoreBox">
-            <label>Nutri Score:</label>
+            <label><img src="bowl-line.svg" alt=""> Nutri Score:</label>
             <div id="nutriDetails" class="hidden"></div>
         </div>
-
+        
         <div class="dropdown-box" id="ingredientsListBox">
-            <label>Ingredients List:</label>
+            <label><img src="file-list-2-line.svg" alt=""> Ingredients List:</label>
             <div id="ingredientsDetails" class="hidden"></div>
         </div>
-
+        
         <div class="dropdown-box" id="ingreAnalysisBox">
-            <label>Ingredients Analysis:</label>
+            <label><img src="scales-2-fill.svg" alt=""> Ingredients Analysis:</label>
             <div id="ingDetails" class="hidden"></div>
         </div>
-
+        
         <div class="dropdown-box" id="caloriesBox">
-            <label>Calorie Counter:</label>
+            <label><img src="compass-discover-line.svg" alt=""> Calorie Counter:</label>
             <div id="calcount" class="hidden"></div>
         </div>
+        
+    </div><br>
+    <div class="bottom">Additional Information: </div>
+    <div class="warning-container">
+        <div class="warning-box" onclick="toggleWarning('sugarWarning')">Added Sugar Level Warning</div>
+        <div class="warning-text hidden" id="sugarWarning">
+            Consuming excessive amounts of added sugar can lead to various health problems, including weight gain, increased risk of type 2 diabetes, heart disease, and damage to organs and blood vessels over time.
+        </div>
+    
+        <div class="warning-box" onclick="toggleWarning('transFatWarning')">Trans Fat Level Warning</div>
+        <div class="warning-text hidden" id="transFatWarning">
+            Trans fats are a type of unsaturated fat, some occurring naturally and others created artificially through hydrogenation, and are generally considered unhealthy due to their impact on cholesterol levels and heart health. Excessive consumption of trans fats has been linked to various health problems, including heart disease, stroke, and type 2 diabetes.
+        </div>
+    
+        <div class="warning-box" onclick="toggleWarning('sodiumWarning')">Sodium Level Warning</div>
+        <div class="warning-text hidden" id="sodiumWarning">
+            Excessive sodium intake can lead to high blood pressure, increasing the risk of heart disease, stroke, kidney problems, and bone loss, as well as contributing to fluid retention.
+        </div>
+    
+        <div class="warning-box" onclick="toggleWarning('additivesWarning')">Additives Warning</div>
+        <div class="warning-text hidden" id="additivesWarning">
+            <b>Artificial Sweeteners:</b><br>
+            Aspartame: Some studies suggest potential links to neurological and behavioral issues, though more research is needed.<br>
+            Acesulfame K: Similar to aspartame, some studies suggest potential neurological and behavioral issues.<br>
+            Sucralose: While generally considered safe, some studies suggest potential impacts on gut microbiota.<br>
+            Sorbitol: Can cause digestive issues like diarrhea and gas in some individuals.<br><br>
+            <b>Artificial Colors:</b><br>
+            Red 40, Yellow 5, Yellow 6: Can cause allergic reactions and may promote hyperactivity in sensitive children.<br>
+            Red 3: Linked to increased risk of thyroid tumors in animal studies.<br><br>
+            <b>Preservatives:</b><br>
+            Nitrites and Nitrates: Found in processed meats, linked to an increased risk of colorectal cancer.<br>
+            BHA (Butylated Hydroxyanisole): Some studies suggest potential cancer risks.<br>
+            Sulphites: Can trigger allergic reactions, especially in people who are asthmatic or have other allergies.<br><br>
+            <b>Other Additives:</b><br>
+            MSG (Monosodium Glutamate): Can trigger allergic reactions and may cause digestive issues.<br>
+            Bisphenol A (BPA): Found in food packaging, linked to increased risk of cancer and endocrine disruption.<br>
+            Phthalates: Found in plastic packaging, can interfere with hormone function and may increase the risk of obesity and cardiovascular disease.
+        </div>
     </div>
+    
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -167,7 +209,10 @@
         calcount.innerHTML = `<div class="calorie-box"><b>Calories: ${calories} kcal (per 100g)</b></div>`;
         calcount.classList.remove('hidden');
     }
-       
+    function toggleWarning(id) {
+    const box = document.getElementById(id);
+    box.classList.toggle('hidden');
+}
 
         // yha niche hai QR scanner ke liye
         const scanner = new Html5QrcodeScanner('reader', {
