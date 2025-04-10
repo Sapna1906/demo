@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Lilita+One&display=swap');
 
-
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Lilita+One&family=Permanent+Marker&display=swap');
 body{
     background-color: rgb(171, 212, 203);
 }
@@ -47,8 +45,29 @@ body{
     border-left: solid rgb(153, 184, 181) 20px; 
     border-right: solid rgb(153, 184, 181) 20px;
     justify-content: center;
+    align-items: center;
     
     
+}
+.navbar {
+  background-color: teal;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  font-family: Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+.menu a {
+  margin: 0 5px;
+  color: white;           /* White text */
+  text-decoration: none; /* No underline */
+  
 }
 .searchbar {
     display: flex;
@@ -98,6 +117,12 @@ body{
     font-family: "Lilita One", sans-serif;
     border-radius: 8px; /* Rounded corners */
 }
+.dropdown-box label img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 .nutri-score {
     padding: 10px;
     font-size: 16px;
@@ -114,6 +139,13 @@ body{
 .hidden {
     display: none;
 }
+.bottom{
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+
+}
 /* Small screens (phones) */
 @media (max-width: 600px) {
     .Heading {
@@ -128,6 +160,7 @@ body{
 
     .swiper-slide img {
         max-width: 90%; /* Smaller images on mobile */
+        justify-content: center;
     }
 
     .dropdown-box {
@@ -157,4 +190,37 @@ body{
 #result {
     text-align: center;
     font-size: 1.5rem;
-}      
+} 
+.warning-container {
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Lilita One", sans-serif;
+}
+
+.warning-box {
+  background-color: #5abeec;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.warning-box:hover {
+  background-color: #d32f2f;
+}
+
+.warning-text {
+  background-color: #fff3e0;
+  color: #333;
+  padding: 10px 15px;
+  border-left: 5px solid #f44336;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  line-height: 1.4rem;
+}
