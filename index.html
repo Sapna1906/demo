@@ -172,19 +172,34 @@
 
         // Nutri Score
         const nutriScoreBox = document.getElementById('nutriDetails');
-        const nutriScore = product.nutriscore_grade ? product.nutriscore_grade.toUpperCase() : 'N/A';
+const nutriScore = product.nutriscore_grade ? product.nutriscore_grade.toUpperCase() : 'N/A';
 
-        let colorClass = 'gray';
-        if (nutriScore === 'A') colorClass = 'green';
-        else if (nutriScore === 'B') colorClass = 'light-green';
-        else if (nutriScore === 'C') colorClass = 'yellow';
-        else if (nutriScore === 'D') colorClass = 'orange';
-        else if (nutriScore === 'E') colorClass = 'red';
+const nutriColors = {
+    A: 'green',
+    B: 'light-green',
+    C: 'yellow',
+    D: 'orange',
+    E: 'red'
+};
 
-        nutriScoreBox.innerHTML = `
-            <div class="nutri-score ${colorClass}"><b>Nutri-Score: ${nutriScore}</b></div>
-        `;
-        nutriScoreBox.classList.remove('hidden');
+const circles = ['A', 'B', 'C', 'D', 'E'].map(letter => {
+    const isActive = letter === nutriScore;
+    const colorClass = nutriColors[letter];
+    return `
+        <div class="nutri-circle ${colorClass} ${isActive ? 'active' : ''}">
+            ${letter}
+        </div>
+    `;
+}).join('');
+
+nutriScoreBox.innerHTML = `
+    <div class="nutri-score-container">
+        ${circles}
+    </div>
+    <div class="nutri-score-label">Nutri-Score: <b>${nutriScore}</b></div>
+`;
+nutriScoreBox.classList.remove('hidden');
+
 
         // Ingredients List
         const ingredientsDetails = document.getElementById('ingredientsDetails');
