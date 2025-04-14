@@ -55,7 +55,7 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 24px;
+  padding: 8px 24px;
   font-family: Arial, sans-serif;
   position: sticky;
   top: 0;
@@ -123,18 +123,46 @@ body{
   margin-right: 8px;
   vertical-align: middle;
 }
-.nutri-score {
-    padding: 10px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 5px;
+.nutri-score-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
+
+.nutri-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+}
+
+.nutri-circle.active {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.nutri-score-label {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 .green { background-color: #4CAF50; color: white; }
 .light-green { background-color: #8BC34A; color: white; }
 .yellow { background-color: #FFEB3B; color: black; }
 .orange { background-color: #FF9800; color: white; }
 .red { background-color: #F44336; color: white; }
 .gray { background-color: #BDBDBD; color: white; }
+
+
 
 .hidden {
     display: none;
