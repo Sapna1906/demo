@@ -35,12 +35,12 @@ body{
     display: flex;
     justify-content: center; /* Center the image */
 }
-.swiper-wrapper {
+/* .swiper-wrapper {
   display: flex;
   justify-content: center;
 }
 
-
+ */
 .swiper-slide img{
      width: 300px;
     height: 200px; 
